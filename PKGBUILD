@@ -31,24 +31,17 @@ build() {
 	# Fix the compile error caused by the missing header
 	patch ./P0267_RefImpl/Tests/main.cpp ../sigsegv.diff
 
-	# Update submodule for external/svgpp
-	#   Boost 1.71.0 and up broke broke the version of svgpp that
-	#     this this is pinned to. Switching to 1.3.0 should fix
-	# https://github.com/cpp-io2d/P0267_RefImpl/issues/136
-	#  and its parent issue
-	#  https://github.com/svgpp/svgpp/issues/79
-	cd ./P0267_RefImpl/Samples/svg/external/svgpp
-	git checkout v1.3.0
-	cd "$srcdir/$_gitdir"
-
-	mkdir build -p
-	cd build
-	cmake .. -DCMAKE_INSTALL_PREFIX=usr
-	cmake --build .
+	cmake -B build -S "." \
+		-DCMAKE_BUILD_TYPE='None' \
+                -DCMAKE_INSTALL_PREFIX='/usr' \
+                -DCMAKE_INSTALL_LIBDIR=lib \
+                -Wno-dev \
+                -DIO2D_WITHOUT_SAMPLES=1
+	cmake --build build
 }
 
 package() {
-	cd "$srcdir/$_gitdir/build"
-	cmake --install . --prefix="${pkgdir}/usr"
+        cd "$_gitdir"
+        DESTDIR="$pkgdir" cmake --install build
 }
 
