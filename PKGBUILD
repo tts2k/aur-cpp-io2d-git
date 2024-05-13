@@ -4,6 +4,7 @@ pkgrel=1
 pkgdesc="P0267 Reference Implementation - A Proposal to add 2d Rendering and Display to C++"
 arch=('x86_64')
 url="https://github.com/cpp-io2d/"
+options=('!lto')
 license=('boost')
 depends=('boost-libs' 'cairo' 'libpng')
 #optdepends=('')
