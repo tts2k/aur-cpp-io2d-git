@@ -7,7 +7,7 @@ url="https://github.com/cpp-io2d/"
 license=('boost')
 depends=('boost-libs' 'cairo' 'libpng')
 #optdepends=('')
-makedepends=('git' 'cmake' 'boost' 'graphicsmagick' 'cairomm' 'libpng')
+makedepends=('git' 'cmake' 'boost' 'graphicsmagick' 'cairomm' 'libpng' 'libsigsegv')
 source=('git+https://github.com/cpp-io2d/P0267_RefImpl.git'
 				'libpngPatch.diff'
 				'sigsegv.diff')
